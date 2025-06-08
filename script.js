@@ -63,9 +63,9 @@ new Vue({
             const retries = Math.floor(Math.random() * 4);
 
             const directoryTree = [];
-            const directories = ['bin', 'etc', 'home', 'var', 'usr', 'opt', 'lib', 'tmp', 'dev'];
-            const subdirs = ['config', 'logs', 'data', 'backup', 'scripts'];
-            const files = ['config.sys', 'kernel.img', 'bootloader.bin', 'passwd', 'shadow', 'readme.md', 'setup.exe', 'data.db', 'logfile.log', 'error.log', 'backup.tar.gz', 'image.png', 'video.mp4', 'script.sh', 'main.py', 'index.html', 'style.css', 'script.js', 'notes.txt', 'report.pdf'];
+            const directories = ['bin', 'etc', 'home', 'var', 'usr', 'opt', 'lib', 'tmp', 'dev', 'sys', 'boot', 'proc', 'run', 'srv', 'media', 'mnt', 'share', 'tools', 'apps'];
+            const subdirs = ['config', 'logs', 'data', 'backup', 'scripts', 'cache', 'temp', 'keys', 'secrets', 'modules', 'plugins', 'assets', 'resources', 'tests', 'examples'];
+            const files = ['config.sys', 'kernel.img', 'bootloader.bin', 'passwd', 'shadow', 'readme.md', 'setup.exe', 'data.db', 'logfile.log', 'error.log', 'backup.tar.gz', 'image.png', 'video.mp4', 'script.sh', 'main.py', 'index.html', 'style.css', 'script.js', 'notes.txt', 'report.pdf', 'debug.log', 'output.txt', 'input.csv', 'metadata.json', 'archive.zip', 'snapshot.img', 'binary.dat', 'source.cpp', 'header.h', 'manifest.xml'];
 
             directories.forEach(dirName => {
                 directoryTree.push(`root/${dirName}/`);
@@ -74,12 +74,12 @@ new Vue({
                 });
                 subdirs.forEach(subdirName => {
                     directoryTree.push(`root/${dirName}/${subdirName}/`);
-                    files.slice(0, 5).forEach(fileName => {
+                    files.slice(0, 15).forEach(fileName => {
                         directoryTree.push(`root/${dirName}/${subdirName}/${fileName}`);
                     });
-                    subdirs.slice(0, 2).forEach(deeperSubdir => {
+                    subdirs.slice(0, 5).forEach(deeperSubdir => {
                         directoryTree.push(`root/${dirName}/${subdirName}/${deeperSubdir}/`);
-                        files.slice(0, 3).forEach(fileName => {
+                        files.slice(0, 10).forEach(fileName => {
                             directoryTree.push(`root/${dirName}/${subdirName}/${deeperSubdir}/${fileName}`);
                         });
                     });
