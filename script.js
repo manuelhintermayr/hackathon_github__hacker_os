@@ -116,20 +116,19 @@ new Vue({
         },
         simulateDirectHacking() {
             let index = 0;
-            const typeCode = (key) => {
+            const typeCode = () => {
                 if (index < codeSnippets.length) {
                     this.terminalOutput += `${codeSnippets[index]}
 `;
                     this.scrollToBottom();
                     index++;
                 } else {
-                    this.terminalOutput += `${key}`;
-                    this.scrollToBottom();
+                    index = 0; // Restart the code snippets loop
                 }
             };
 
-            document.addEventListener('keydown', (event) => {
-                typeCode(event.key);
+            document.addEventListener('keydown', () => {
+                typeCode();
             });
         },
         delay(ms) {
