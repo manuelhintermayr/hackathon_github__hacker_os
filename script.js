@@ -118,8 +118,12 @@ new Vue({
             let index = 0;
             const typeCode = () => {
                 if (index < codeSnippets.length) {
-                    this.terminalOutput += `${codeSnippets[index]}
-`;
+                    const snippet = codeSnippets[index]
+                        .replace(/&/g, '&amp;')
+                        .replace(/</g, '&lt;')
+                        .replace(/>/g, '&gt;')
+                        .replace(/\n/g, '<br/>');
+                    this.terminalOutput = this.terminalOutput.replace(/\|$/, '') + snippet + '<br/>';
                     this.scrollToBottom();
                     index++;
                 } else {
@@ -127,9 +131,17 @@ new Vue({
                 }
             };
 
-            document.addEventListener('keydown', () => {
+            document.addEventListener('keydown', (e) => {
+                if (e.keyCode === 122) return; // Allow F11 for fullscreen
+                e.preventDefault();
                 typeCode();
             });
+
+            setInterval(() => {
+                const content = this.terminalOutput.replace(/\|$/, '');
+                this.terminalOutput = content + '|';
+                this.scrollToBottom();
+            }, 500); // Cursor animation
         },
         delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
