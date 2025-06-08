@@ -62,56 +62,20 @@ new Vue({
             const vulnerabilities = ['Buffer Overflow', 'SQL Injection', 'Cross-Site Scripting', 'Privilege Escalation', 'Remote Code Execution'];
             const retries = Math.floor(Math.random() * 4);
 
-            const directoryTree = [
-                'root/',
-                'root/bin/',
-                'root/bin/bash',
-                'root/bin/ls',
-                'root/etc/',
-                'root/etc/passwd',
-                'root/etc/shadow',
-                'root/home/',
-                'root/home/user/',
-                'root/home/user/documents/',
-                'root/home/user/documents/file1.txt',
-                'root/home/user/documents/file2.txt',
-                'root/home/user/documents/file3.txt',
-                'root/home/user/documents/file4.txt',
-                'root/home/user/pictures/',
-                'root/home/user/pictures/image1.jpg',
-                'root/home/user/pictures/image2.png',
-                'root/home/user/pictures/image3.gif',
-                'root/home/user/videos/',
-                'root/home/user/videos/video1.mp4',
-                'root/home/user/videos/video2.avi',
-                'root/home/user/videos/video3.mkv',
-                'root/home/user/music/',
-                'root/home/user/music/song1.mp3',
-                'root/home/user/music/song2.wav',
-                'root/home/user/music/song3.flac',
-                'root/home/user/projects/',
-                'root/home/user/projects/project1/',
-                'root/home/user/projects/project1/code.js',
-                'root/home/user/projects/project1/readme.md',
-                'root/home/user/projects/project2/',
-                'root/home/user/projects/project2/main.py',
-                'root/home/user/projects/project2/requirements.txt',
-                'root/home/user/projects/project3/',
-                'root/home/user/projects/project3/index.html',
-                'root/home/user/projects/project3/style.css',
-                'root/home/user/projects/project3/script.js',
-                'root/home/user/downloads/',
-                'root/home/user/downloads/file1.zip',
-                'root/home/user/downloads/file2.rar',
-                'root/home/user/downloads/file3.tar.gz',
-                'root/home/user/downloads/file4.iso',
-                'root/home/user/temp/',
-                'root/home/user/temp/tempfile1.tmp',
-                'root/home/user/temp/tempfile2.tmp',
-                'root/home/user/temp/tempfile3.tmp',
-                'root/home/user/temp/tempfile4.tmp',
-                'root/home/user/temp/tempfile5.tmp'
-            ];
+            const directoryTree = [];
+            const directories = ['bin', 'etc', 'home', 'var', 'usr', 'opt', 'lib', 'tmp', 'dev'];
+            const files = ['config.sys', 'kernel.img', 'bootloader.bin', 'passwd', 'shadow', 'readme.md', 'setup.exe', 'data.db', 'logfile.log', 'error.log', 'backup.tar.gz', 'image.png', 'video.mp4', 'script.sh', 'main.py', 'index.html', 'style.css', 'script.js', 'notes.txt', 'report.pdf'];
+
+            directories.forEach(dirName => {
+                directoryTree.push(`root/${dirName}/`);
+                files.forEach(fileName => {
+                    directoryTree.push(`root/${dirName}/${fileName}`);
+                });
+                directoryTree.push(`root/${dirName}/subdir/`);
+                files.slice(0, 5).forEach(fileName => {
+                    directoryTree.push(`root/${dirName}/subdir/${fileName}`);
+                });
+            });
 
             const simulateSteps = async () => {
                 this.terminalOutput += `Loading domain/IP address ${target}...\n`;
@@ -131,7 +95,7 @@ new Vue({
                     setTimeout(() => {
                         this.terminalOutput += `${line}\n`;
                         this.scrollToBottom();
-                    }, index * 100);
+                    }, index * 20);
                 });
             };
 
