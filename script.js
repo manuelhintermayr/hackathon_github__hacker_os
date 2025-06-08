@@ -13,7 +13,7 @@ new Vue({
 
             // Simulate command execution
             if (this.command === 'help') {
-                this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\nattack xxxx - Simulate an attack on an IP or domain\nhackrepo xxxx - Simulate hacking and display a directory tree\n';
+                this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\nattack xxxx - Simulate an attack on an IP or domain\nhackrepo xxxx - Simulate hacking and display a directory tree\ndirecthacking - Simulate typing code like hackertyper.com\n';
             } else if (this.command === 'clear') {
                 this.terminalOutput = '';
             } else if (this.command === 'exit') {
@@ -33,6 +33,8 @@ new Vue({
                 } else {
                     this.terminalOutput += `Invalid target: ${target}\nPlease enter a valid IP address or domain.\n`;
                 }
+            } else if (this.command.startsWith('directhacking')) {
+                this.simulateDirectHacking();
             } else {
                 this.terminalOutput += `Unknown command: ${this.command}\n`;
             }
@@ -109,6 +111,39 @@ new Vue({
             };
 
             simulateSteps();
+        },
+        simulateDirectHacking() {
+            const codeSnippets = [
+                'function hackSystem() {',
+                '    console.log("Hacking in progress...");',
+                '    let accessGranted = false;',
+                '    for (let i = 0; i < 1000; i++) {',
+                '        if (Math.random() > 0.99) {',
+                '            accessGranted = true;',
+                '            break;',
+                '        }',
+                '    }',
+                '    return accessGranted;',
+                '}',
+                'const result = hackSystem();',
+                'if (result) {',
+                '    console.log("Access granted!");',
+                '} else {',
+                '    console.log("Access denied.");',
+                '}'
+            ];
+
+            let index = 0;
+            const typeCode = () => {
+                if (index < codeSnippets.length) {
+                    this.terminalOutput += `${codeSnippets[index]}\n`;
+                    this.scrollToBottom();
+                    index++;
+                    setTimeout(typeCode, 100);
+                }
+            };
+
+            typeCode();
         },
         delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
