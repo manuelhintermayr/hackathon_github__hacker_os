@@ -75,9 +75,42 @@ new Vue({
                 'root/home/user/documents/',
                 'root/home/user/documents/file1.txt',
                 'root/home/user/documents/file2.txt',
+                'root/home/user/documents/file3.txt',
+                'root/home/user/documents/file4.txt',
                 'root/home/user/pictures/',
                 'root/home/user/pictures/image1.jpg',
-                'root/home/user/pictures/image2.png'
+                'root/home/user/pictures/image2.png',
+                'root/home/user/pictures/image3.gif',
+                'root/home/user/videos/',
+                'root/home/user/videos/video1.mp4',
+                'root/home/user/videos/video2.avi',
+                'root/home/user/videos/video3.mkv',
+                'root/home/user/music/',
+                'root/home/user/music/song1.mp3',
+                'root/home/user/music/song2.wav',
+                'root/home/user/music/song3.flac',
+                'root/home/user/projects/',
+                'root/home/user/projects/project1/',
+                'root/home/user/projects/project1/code.js',
+                'root/home/user/projects/project1/readme.md',
+                'root/home/user/projects/project2/',
+                'root/home/user/projects/project2/main.py',
+                'root/home/user/projects/project2/requirements.txt',
+                'root/home/user/projects/project3/',
+                'root/home/user/projects/project3/index.html',
+                'root/home/user/projects/project3/style.css',
+                'root/home/user/projects/project3/script.js',
+                'root/home/user/downloads/',
+                'root/home/user/downloads/file1.zip',
+                'root/home/user/downloads/file2.rar',
+                'root/home/user/downloads/file3.tar.gz',
+                'root/home/user/downloads/file4.iso',
+                'root/home/user/temp/',
+                'root/home/user/temp/tempfile1.tmp',
+                'root/home/user/temp/tempfile2.tmp',
+                'root/home/user/temp/tempfile3.tmp',
+                'root/home/user/temp/tempfile4.tmp',
+                'root/home/user/temp/tempfile5.tmp'
             ];
 
             const simulateSteps = async () => {
@@ -98,7 +131,7 @@ new Vue({
                     setTimeout(() => {
                         this.terminalOutput += `${line}\n`;
                         this.scrollToBottom();
-                    }, index * 300);
+                    }, index * 100);
                 });
             };
 
