@@ -92,16 +92,31 @@
 
                     // Simulate command execution
                     if (this.command === 'help') {
-                        this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\n';
+                        this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\nattack xxxx - Simulate an attack on an IP or domain\n';
                     } else if (this.command === 'clear') {
                         this.terminalOutput = '';
                     } else if (this.command === 'exit') {
                         this.terminalOutput += 'Exiting Hacker OS...\n';
+                    } else if (this.command.startsWith('attack ')) {
+                        const target = this.command.split(' ')[1];
+                        if (this.validateTarget(target)) {
+                            this.terminalOutput += `Simulating attack on ${target}...\nAttack successful!\n`;
+                        } else {
+                            this.terminalOutput += `Invalid target: ${target}\nPlease enter a valid IP address or domain.\n`;
+                        }
                     } else {
                         this.terminalOutput += `Unknown command: ${this.command}\n`;
                     }
 
                     this.command = '';
+                },
+                validateTarget(target) {
+                    // Validate IP address
+                    const ipRegex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
+                    // Validate domain
+                    const domainRegex = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.[A-Za-z]{2,6}$/;
+
+                    return ipRegex.test(target) || domainRegex.test(target);
                 }
             }
         });
