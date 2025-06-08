@@ -89,6 +89,7 @@
                     if (this.command.trim() === '') return;
 
                     this.terminalOutput += `> ${this.command}\n`;
+                    this.scrollToBottom();
 
                     // Simulate command execution
                     if (this.command === 'help') {
@@ -97,10 +98,11 @@
                         this.terminalOutput = '';
                     } else if (this.command === 'exit') {
                         this.terminalOutput += 'Exiting Hacker OS...\n';
-                    } else if (this.command.startsWith('attack ')) {
+                    } else if (this.command.startsWith('attack')) {
                         const target = this.command.split(' ')[1];
                         if (this.validateTarget(target)) {
-                            this.terminalOutput += `Simulating attack on ${target}...\nAttack successful!\n`;
+                            this.terminalOutput += `Loading target ${target}...\n`;
+                            this.simulateAttack();
                         } else {
                             this.terminalOutput += `Invalid target: ${target}\nPlease enter a valid IP address or domain.\n`;
                         }
@@ -110,6 +112,24 @@
 
                     this.command = '';
                 },
+                simulateAttack() {
+                    const hexSymbols = '0123456789ABCDEF';
+                    const generateHexBlock = () => {
+                        let block = '';
+                        for (let i = 0; i < 50; i++) {
+                            block += hexSymbols[Math.floor(Math.random() * hexSymbols.length)];
+                        }
+                        return block;
+                    };
+
+                    const appendHexBlock = () => {
+                        this.terminalOutput += `${generateHexBlock()}\n`;
+                        this.scrollToBottom();
+                        setTimeout(appendHexBlock, 300);
+                    };
+
+                    appendHexBlock();
+                },
                 validateTarget(target) {
                     // Validate IP address
                     const ipRegex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
@@ -117,6 +137,12 @@
                     const domainRegex = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.[A-Za-z]{2,6}$/;
 
                     return ipRegex.test(target) || domainRegex.test(target);
+                },
+                scrollToBottom() {
+                    this.$nextTick(() => {
+                        const terminal = this.$el.querySelector('.terminal');
+                        terminal.scrollTop = terminal.scrollHeight;
+                    });
                 }
             }
         });
