@@ -180,16 +180,21 @@ new Vue({
         document.addEventListener('keydown', (e) => {
             if (e.key === 'a') { // 'a' key
                 accessCount++;
-                if (accessCount >= 2) {
+                deniedCount = 0; // Reset denied count
+                if (accessCount >= 3) {
                     this.makeAccess();
                     accessCount = 0; // Reset count
                 }
             } else if (e.key === 'd') { // 'd' key
                 deniedCount++;
-                if (deniedCount >= 2) {
+                accessCount = 0; // Reset access count
+                if (deniedCount >= 3) {
                     this.makeDenied();
                     deniedCount = 0; // Reset count
                 }
+            } else {
+                accessCount = 0; // Reset both counts
+                deniedCount = 0;
             }
         });
     }

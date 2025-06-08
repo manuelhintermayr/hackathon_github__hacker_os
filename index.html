@@ -18,11 +18,8 @@
                 <button @click="executeCommand">Run</button>
             </div>
         </div>
-        <div id="gran" class="accessGranted" v-if="accessGranted">
-            <h2>ACCESS GRANTED</h2>
-        </div>
-        <div id="deni" class="accessDenied" v-if="accessDenied">
-            <h2>ACCESS DENIED</h2>
+        <div id="gran" :class="accessGranted ? 'accessGranted' : 'accessDenied'" v-if="accessGranted || accessDenied">
+            <h2>{{ accessGranted ? 'ACCESS GRANTED' : 'ACCESS DENIED' }}</h2>
         </div>
     </div>
 </body>
