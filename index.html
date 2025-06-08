@@ -4,66 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacker OS</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <style>
-        body {
-            background-color: black;
-            color: limegreen;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            overflow: hidden;
-        }
-
-        #app {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        .window {
-            border: 2px solid limegreen;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .terminal {
-            height: 200px;
-            overflow-y: auto;
-            white-space: pre-wrap;
-            background-color: black;
-            color: limegreen;
-            padding: 10px;
-            border: 2px solid limegreen;
-        }
-
-        .input {
-            display: flex;
-            margin-top: 10px;
-        }
-
-        .input input {
-            flex: 1;
-            background-color: black;
-            color: limegreen;
-            border: 2px solid limegreen;
-            padding: 5px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .input button {
-            background-color: limegreen;
-            color: black;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .input button:hover {
-            background-color: darkgreen;
-        }
-    </style>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <div id="app">
@@ -76,76 +19,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                terminalOutput: 'Welcome to Hacker OS\nType a command to begin...\n',
-                command: ''
-            },
-            methods: {
-                executeCommand() {
-                    if (this.command.trim() === '') return;
-
-                    this.terminalOutput += `> ${this.command}\n`;
-                    this.scrollToBottom();
-
-                    // Simulate command execution
-                    if (this.command === 'help') {
-                        this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\nattack xxxx - Simulate an attack on an IP or domain\n';
-                    } else if (this.command === 'clear') {
-                        this.terminalOutput = '';
-                    } else if (this.command === 'exit') {
-                        this.terminalOutput += 'Exiting Hacker OS...\n';
-                    } else if (this.command.startsWith('attack')) {
-                        const target = this.command.split(' ')[1];
-                        if (this.validateTarget(target)) {
-                            this.terminalOutput += `Loading target ${target}...\n`;
-                            this.simulateAttack();
-                        } else {
-                            this.terminalOutput += `Invalid target: ${target}\nPlease enter a valid IP address or domain.\n`;
-                        }
-                    } else {
-                        this.terminalOutput += `Unknown command: ${this.command}\n`;
-                    }
-
-                    this.command = '';
-                },
-                simulateAttack() {
-                    const hexSymbols = '0123456789ABCDEF';
-                    const generateHexBlock = () => {
-                        let block = '';
-                        for (let i = 0; i < 50; i++) {
-                            block += hexSymbols[Math.floor(Math.random() * hexSymbols.length)];
-                        }
-                        return block;
-                    };
-
-                    const appendHexBlock = () => {
-                        this.terminalOutput += `${generateHexBlock()}\n`;
-                        this.scrollToBottom();
-                        setTimeout(appendHexBlock, 300);
-                    };
-
-                    appendHexBlock();
-                },
-                validateTarget(target) {
-                    // Validate IP address
-                    const ipRegex = /^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[0-1]?[0-9][0-9]?)$/;
-                    // Validate domain
-                    const domainRegex = /^(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.[A-Za-z]{2,6}$/;
-
-                    return ipRegex.test(target) || domainRegex.test(target);
-                },
-                scrollToBottom() {
-                    this.$nextTick(() => {
-                        const terminal = this.$el.querySelector('.terminal');
-                        terminal.scrollTop = terminal.scrollHeight;
-                    });
-                }
-            }
-        });
-    </script>
 </body>
 </html>

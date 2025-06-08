@@ -1,0 +1,57 @@
+body {
+    background-color: black;
+    color: limegreen;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    overflow: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+}
+
+.window {
+    border: 2px solid limegreen;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.terminal {
+    height: 200px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    background-color: black;
+    color: limegreen;
+    padding: 10px;
+    border: 2px solid limegreen;
+}
+
+.input {
+    display: flex;
+    margin-top: 10px;
+}
+
+.input input {
+    flex: 1;
+    background-color: black;
+    color: limegreen;
+    border: 2px solid limegreen;
+    padding: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.input button {
+    background-color: limegreen;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.input button:hover {
+    background-color: darkgreen;
+}
