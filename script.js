@@ -134,16 +134,20 @@ new Vue({
             ];
 
             let index = 0;
-            const typeCode = () => {
+            const typeCode = (key) => {
                 if (index < codeSnippets.length) {
                     this.terminalOutput += `${codeSnippets[index]}\n`;
                     this.scrollToBottom();
                     index++;
-                    setTimeout(typeCode, 100);
+                } else {
+                    this.terminalOutput += `${key}`;
+                    this.scrollToBottom();
                 }
             };
 
-            typeCode();
+            document.addEventListener('keydown', (event) => {
+                typeCode(event.key);
+            });
         },
         delay(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
