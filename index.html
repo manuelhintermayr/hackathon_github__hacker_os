@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker OS</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        body {
+            background-color: black;
+            color: limegreen;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .window {
+            border: 2px solid limegreen;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .terminal {
+            height: 200px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            background-color: black;
+            color: limegreen;
+            padding: 10px;
+            border: 2px solid limegreen;
+        }
+
+        .input {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .input input {
+            flex: 1;
+            background-color: black;
+            color: limegreen;
+            border: 2px solid limegreen;
+            padding: 5px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .input button {
+            background-color: limegreen;
+            color: black;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .input button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="window">
+            <h2>Hacker OS</h2>
+            <div class="terminal" v-html="terminalOutput"></div>
+            <div class="input">
+                <input type="text" v-model="command" @keyup.enter="executeCommand" placeholder="Enter command...">
+                <button @click="executeCommand">Run</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                terminalOutput: 'Welcome to Hacker OS\nType a command to begin...\n',
+                command: ''
+            },
+            methods: {
+                executeCommand() {
+                    if (this.command.trim() === '') return;
+
+                    this.terminalOutput += `> ${this.command}\n`;
+
+                    // Simulate command execution
+                    if (this.command === 'help') {
+                        this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\n';
+                    } else if (this.command === 'clear') {
+                        this.terminalOutput = '';
+                    } else if (this.command === 'exit') {
+                        this.terminalOutput += 'Exiting Hacker OS...\n';
+                    } else {
+                        this.terminalOutput += `Unknown command: ${this.command}\n`;
+                    }
+
+                    this.command = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
