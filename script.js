@@ -17,7 +17,7 @@ new Vue({
 
             // Simulate command execution
             if (this.command === 'help') {
-                this.terminalOutput += 'Available commands:\nhelp - Show this help\nclear - Clear the terminal\nexit - Close Hacker OS\nattack xxxx - Simulate an attack on an IP or domain\nhackrepo xxxx - Simulate hacking and display a directory tree\ndirecthacking - Simulate typing code like hackertyper.com\n';
+                this.terminalOutput += 'Available commands:\nhelp - Display available commands\nclear - Clear the terminal\nexit - Terminate Hacker OS\nattack xxxx - Execute an attack on a specified IP or domain\nhackrepo xxxx - Access and retrieve repository contents\ndirecthacking - Perform direct hacking operations\n';
             } else if (this.command === 'clear') {
                 this.terminalOutput = '';
             } else if (this.command === 'exit') {
