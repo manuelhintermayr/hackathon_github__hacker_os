@@ -4,7 +4,9 @@ new Vue({
     el: '#app',
     data: {
         terminalOutput: 'Welcome to Hacker OS\nType a command to begin...\n',
-        command: ''
+        command: '',
+        accessGranted: false,
+        accessDenied: false
     },
     methods: {
         executeCommand() {
@@ -159,6 +161,36 @@ new Vue({
                 const terminal = this.$el.querySelector('.terminal');
                 terminal.scrollTop = terminal.scrollHeight;
             });
+        },
+        makeAccess() {
+            this.accessGranted = true;
+            this.accessDenied = false;
+            setTimeout(() => this.accessGranted = false, 3000); // Hide after 3 seconds
+        },
+        makeDenied() {
+            this.accessDenied = true;
+            this.accessGranted = false;
+            setTimeout(() => this.accessDenied = false, 3000); // Hide after 3 seconds
         }
+    },
+    mounted() {
+        let accessCount = 0;
+        let deniedCount = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'a') { // 'a' key
+                accessCount++;
+                if (accessCount >= 2) {
+                    this.makeAccess();
+                    accessCount = 0; // Reset count
+                }
+            } else if (e.key === 'd') { // 'd' key
+                deniedCount++;
+                if (deniedCount >= 2) {
+                    this.makeDenied();
+                    deniedCount = 0; // Reset count
+                }
+            }
+        });
     }
 });

@@ -55,3 +55,29 @@ body {
 .input button:hover {
     background-color: darkgreen;
 }
+
+.accessGranted {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #666; /* Lighter gray for better text visibility */
+    padding: 20px;
+    border: 2px solid #aaa; /* Lighter gray border */
+    width: 300px;
+    text-align: center;
+    color: limegreen;
+}
+
+.accessDenied {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid #aaa; /* Lighter gray border */
+    background: #444; /* Lighter gray for better text visibility */
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    color: #ff0000;
+}
