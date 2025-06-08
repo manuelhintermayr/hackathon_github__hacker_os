@@ -64,6 +64,7 @@ new Vue({
 
             const directoryTree = [];
             const directories = ['bin', 'etc', 'home', 'var', 'usr', 'opt', 'lib', 'tmp', 'dev'];
+            const subdirs = ['config', 'logs', 'data', 'backup', 'scripts'];
             const files = ['config.sys', 'kernel.img', 'bootloader.bin', 'passwd', 'shadow', 'readme.md', 'setup.exe', 'data.db', 'logfile.log', 'error.log', 'backup.tar.gz', 'image.png', 'video.mp4', 'script.sh', 'main.py', 'index.html', 'style.css', 'script.js', 'notes.txt', 'report.pdf'];
 
             directories.forEach(dirName => {
@@ -71,9 +72,17 @@ new Vue({
                 files.forEach(fileName => {
                     directoryTree.push(`root/${dirName}/${fileName}`);
                 });
-                directoryTree.push(`root/${dirName}/subdir/`);
-                files.slice(0, 5).forEach(fileName => {
-                    directoryTree.push(`root/${dirName}/subdir/${fileName}`);
+                subdirs.forEach(subdirName => {
+                    directoryTree.push(`root/${dirName}/${subdirName}/`);
+                    files.slice(0, 5).forEach(fileName => {
+                        directoryTree.push(`root/${dirName}/${subdirName}/${fileName}`);
+                    });
+                    subdirs.slice(0, 2).forEach(deeperSubdir => {
+                        directoryTree.push(`root/${dirName}/${subdirName}/${deeperSubdir}/`);
+                        files.slice(0, 3).forEach(fileName => {
+                            directoryTree.push(`root/${dirName}/${subdirName}/${deeperSubdir}/${fileName}`);
+                        });
+                    });
                 });
             });
 
