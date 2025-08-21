@@ -6,7 +6,7 @@ This is a modern terminal-based application, built with Vue.js (CDN) and pure HT
 
 ![Hacker OS Screenshot](hacker_os.png)
 
-Try it out [here](https://hackathon.manuelweb.at/hacker_os/).
+Try it out [here](https://projects.manuelhintermayr.com/hacker-os/).
 
 ## Features
 - Realistic terminal interface
